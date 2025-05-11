@@ -1,2 +1,1 @@
-/*
-  Content-Security-Policy: script-src 'self' 'unsafe-eval' https://maps.googleapis.com https://maps.gstatic.com; object-src 'none'; base-uri 'self';
+Content-Security-Policy: script-src 'self' 'unsafe-eval' https://maps.googleapis.com https://maps.gstatic.com; object-src 'none'; base-uri 'self';
