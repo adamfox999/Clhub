@@ -1,0 +1,141 @@
+.media-card {
+  position: relative;
+
+  display: flex;
+  overflow: hidden;
+  width: 25%;
+  height: 300px;
+  padding: var(--spacing--spacing-6);
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  grid-row-gap: 10px;
+
+  border-radius: var(--spacing--radius--medium);
+
+  transition: width 300ms cubic-bezier(0.2, 0.0, 0, 1.0);
+
+  text-decoration: none;
+}
+
+.media-card:hover {
+  width: 50%;
+}
+
+@media screen and (max-width: 479px) {
+  .media-card {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .media-card:hover {
+    width: 100%;
+  }
+}
+
+.media-card.dark {
+  position: relative;
+  z-index: 100;
+
+  padding: 10px 20px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  aspect-ratio: 2/3;
+
+  background-image: linear-gradient(0deg, black, hsla(0, 0.00%, 100.00%, 0.00) 24%), url("https://cdn.prod.website-files.com/6665c80fd12b155dd460e2c8/66697d01067b83dff6a7804b_Duncan-GT15-main-scaled.webp");
+  background-position: 0px 0px, 50% 50%;
+  background-size: auto, auto;
+}
+
+.media-card.dark.sail {
+  background-image: linear-gradient(0deg, black, hsla(0, 0.00%, 100.00%, 0.00) 24%), url("https://cdn.prod.website-files.com/6665c80fd12b155dd460e2c8/6669802a6c980f7c7de770fb_discover-sailing-media.webp");
+  background-position: 0px 0px, 50% 100%;
+  background-size: auto, auto;
+}
+
+.media-card.dark.fish {
+  background-image: linear-gradient(0deg, black, hsla(0, 0.00%, 100.00%, 0.00) 24%), url("https://cdn.prod.website-files.com/6665c80fd12b155dd460e2c8/66697f220212e66df73f32f8_IMG_5292.jpg");
+  background-position: 0px 0px, 20% 50%;
+  background-size: auto, auto;
+}
+
+.media-card.dark.ski {
+  background-image: linear-gradient(0deg, black, hsla(0, 0.00%, 100.00%, 0.00) 24%), url("https://cdn.prod.website-files.com/6665c80fd12b155dd460e2c8/66697edaecc7d007182cfc5b_cuay01.jpg");
+  background-position: 0px 0px, 75% 50%;
+  background-size: auto, auto;
+}
+
+.media-card-image {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+
+  width: 100%;
+  height: 100%;
+
+  transition: all 200ms ease;
+
+  object-fit: cover;
+}
+
+.filter {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+
+  background-image: linear-gradient(0deg, hsla(0, 0.00%, 0.00%, 0.30), hsla(0, 0.00%, 100.00%, 0.00) 40%);
+}
+
+.headline-medium {
+  font-family: Bitter, serif;
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  letter-spacing: 0px;
+}
+
+.on-primary {
+  color: var(--schemes--on-primary);
+}
+
+.title-medium {
+  margin-top: 0px;
+  margin-bottom: 0px;
+
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.009rem;
+}
+
+.title-medium.on-primary-container {
+  color: var(--schemes--on-primary-container);
+}
+
+.on-primary-container {
+  color: var(--schemes--on-primary-container);
+}
+
+.title-medium.on-primary.media-card-text {
+  position: relative;
+}
+
+.footer-title {
+  margin-bottom: var(--spacing--spacing-5);
+}
+
+.body-small {
+  position: relative;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.025rem;
+}
+
+.body-small.on-primary-container {
+  color: var(--schemes--on-primary-container);
+}

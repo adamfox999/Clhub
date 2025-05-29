@@ -1,0 +1,11 @@
+Booking Confirmed: {{courseTitle}}
+
+Thank you for booking {{courseTitle}}!
+
+Date: {{date}}
+Duration: {{duration}}
+Description: {{description}}
+Amount paid: £{{amountPaid}}
+
+We look forward to seeing you on the water!
+Sailing School Team

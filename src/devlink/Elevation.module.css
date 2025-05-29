@@ -1,0 +1,131 @@
+.section-2 {
+  justify-content: center;
+  background-color: transparent;
+}
+
+@media screen and (max-width: 991px) {
+  .section-2 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .section-2 {
+    padding-top: 0px;
+  }
+}
+
+.container-2 {
+  max-width: 1920px;
+  margin: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 479px) {
+  .container-2 {
+    margin-right: 8px;
+    margin-left: 8px;
+  }
+}
+
+.colour-swatch-grid {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+}
+
+@media screen and (max-width: 991px) {
+  .colour-swatch-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .colour-swatch-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.elevation-1 {
+  box-shadow: var(--elevation--2-drop-shadow-1-x) var(--elevation--2-drop-shadow-1-y) var(--elevation--2-drop-shadow-1-blur) var(--elevation--2-drop-shadow-1-spread) var(--elevation--1-drop-shadow-2), var(--elevation--1-drop-shadow-1-x) var(--elevation--1-drop-shadow-1-y) var(--elevation--1-drop-shadow-1-blur) var(--elevation--1-drop-shadow-1-spread) var(--elevation--1-drop-shadow-1);
+}
+
+.elevation-1._1 {
+  box-shadow: 0 1px 3px 1px hsla(0, 0.00%, 0.00%, 0.15), 0 1px 2px 0 hsla(0, 0.00%, 0.00%, 0.30);
+}
+
+.elevation-1.elevation-card {
+  display: flex;
+  min-height: 150px;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.elevation-card {
+  display: flex;
+  min-height: 150px;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.swatch {
+  display: flex;
+  min-height: 100px;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.card {
+  position: relative;
+  bottom: auto;
+
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  border: 1px solid var(--schemes--outline-variant);
+  border-radius: var(--spacing--radius--medium);
+
+  background-color: var(--schemes--surface);
+
+  color: hsla(0, 0.00%, 0.00%, 1.00);
+}
+
+.card:hover {
+  background-image: linear-gradient(to bottom, var(--schemes--layer-state--on-surface-opacity-0-08),var(--schemes--layer-state--on-surface-opacity-0-08));
+}
+
+.colour-card-label {
+  padding: 10px;
+}
+
+.elevation-2 {
+  box-shadow: var(--elevation--2-drop-shadow-2-x) var(--elevation--2-drop-shadow-2-y) var(--elevation--2-drop-shadow-2-blur) var(--elevation--2-drop-shadow-2-spread) var(--elevation--2-drop-shadow-2), var(--elevation--2-drop-shadow-1-x) var(--elevation--2-drop-shadow-1-y) var(--elevation--2-drop-shadow-1-blur) var(--elevation--2-drop-shadow-1-spread) var(--elevation--2-drop-shadow-1);
+}
+
+.elevation-3 {
+  box-shadow: var(--elevation--3-drop-shadow-2-x) var(--elevation--3-drop-shadow-2-y) var(--elevation--3-drop-shadow-2-blur) var(--elevation--3-drop-shadow-2-spread) var(--elevation--3-drop-shadow-2), var(--elevation--3-drop-shadow-1-x) var(--elevation--3-drop-shadow-1-y) var(--elevation--3-drop-shadow-1-blur) var(--elevation--3-drop-shadow-1-spread) var(--elevation--3-drop-shadow-1);
+}
+
+.elevation-4 {
+  box-shadow: var(--elevation--4-drop-shadow-2-x) var(--elevation--4-drop-shadow-2-y) var(--elevation--4-drop-shadow-2-blur) var(--elevation--4-drop-shadow-2-spread) var(--elevation--4-drop-shadow-2), var(--elevation--4-drop-shadow-1-x) var(--elevation--4-drop-shadow-1-y) var(--elevation--4-drop-shadow-1-blur) var(--elevation--4-drop-shadow-1-spread) var(--elevation--4-drop-shadow-1);
+}
+
+.elevation-5 {
+  box-shadow: var(--elevation--5-drop-shadow-2-x) var(--elevation--5-drop-shadow-2-y) var(--elevation--5-drop-shadow-2-blur) var(--elevation--5-drop-shadow-2-spread) var(--elevation--5-drop-shadow-2), var(--elevation--5-drop-shadow-1-x) var(--elevation--5-drop-shadow-1-y) var(--elevation--5-drop-shadow-1-blur) var(--elevation--5-drop-shadow-1-spread) var(--elevation--5-drop-shadow-1);
+}
+
+#w-node-_814259e5-e15b-9466-30e5-6c14f49994d8-f49994ca {
+}
+#w-node-_814259e5-e15b-9466-30e5-6c14f49994dc-f49994ca {
+}
+#w-node-_814259e5-e15b-9466-30e5-6c14f49994e0-f49994ca {
+}

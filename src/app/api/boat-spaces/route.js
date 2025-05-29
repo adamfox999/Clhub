@@ -1,28 +1,22 @@
-import { connectToDB } from '../../../lib/mongodb';
-import mongoose from 'mongoose';
-
-const BoatSpaceSchema = new mongoose.Schema({
-  _id: String,
-  status: String,
-  lat: Number,
-  lng: Number
-}, {
-  collection: 'boat_spaces'
-});
-
-const BoatSpace = mongoose.models.BoatSpace || mongoose.model('BoatSpace', BoatSpaceSchema);
+import { connectToDB } from '@/lib/mongodb';
+import BoatSpace from '@/models/BoatSpace';
 
 export async function GET() {
-  await connectToDB();
-  const data = await BoatSpace.find();
-  return Response.json(data);
+  try {
+    await connectToDB();
+    const data = await BoatSpace.find();
+    return Response.json(data);
+  } catch (err) {
+    console.error('GET /api/boat-spaces failed:', err);
+    return Response.json({ error: 'Failed to load boat spaces', details: err.message }, { status: 500 });
+  }
 }
 
 export async function POST(request) {
-  await connectToDB();
-  const body = await request.json();
-
   try {
+    await connectToDB();
+    const body = await request.json();
+
     const upserted = await BoatSpace.findByIdAndUpdate(
       body._id,
       { $set: body },
@@ -30,6 +24,7 @@ export async function POST(request) {
     );
     return Response.json(upserted);
   } catch (err) {
+    console.error('POST /api/boat-spaces failed:', err);
     return Response.json({ error: 'Failed to save boat space', details: err.message }, { status: 500 });
   }
 }
