@@ -1,7 +1,6 @@
-'use client';
 
-import { SessionProvider } from 'next-auth/react';
+import { AuthProvider } from '@/lib/SupabaseAuthContext';
 
 export default function SessionWrapper({ children }) {
-  return <SessionProvider>{children}</SessionProvider>;
+  return <AuthProvider>{children}</AuthProvider>;
 }

@@ -1,10 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useAuth } from '@/lib/SupabaseAuthContext';
+import { supabase } from '@/lib/supabaseClient';
 
 export default function Navbar() {
-  const { data: session, status } = useSession();
+  const { user, loading } = useAuth();
 
   return (
     <nav style={{ padding: '1rem', borderBottom: '1px solid #ccc', display: 'flex', justifyContent: 'space-between' }}>
@@ -14,15 +15,17 @@ export default function Navbar() {
         <Link href="/sailing-school" style={{ marginRight: '1rem' }}>Sailing School</Link>
       </div>
       <div>
-        {status === 'loading' ? (
+        {loading ? (
           'Loading...'
-        ) : session ? (
+        ) : user ? (
           <>
-            <span style={{ marginRight: '1rem' }}>{session.user.name || session.user.email}</span>
-            <button onClick={() => signOut()}>Log out</button>
+            <span style={{ marginRight: '1rem' }}>{user.email}</span>
+            <button onClick={async () => { await supabase.auth.signOut(); }}>Log out</button>
           </>
         ) : (
-          <button onClick={() => signIn()}>Log in</button>
+          <Link href="/account/signin">
+            <button>Log in</button>
+          </Link>
         )}
       </div>
     </nav>

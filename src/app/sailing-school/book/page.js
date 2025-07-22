@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+
 import { useSearchParams, useRouter } from "next/navigation";
 import { loadStripe } from '@stripe/stripe-js';
 import {
@@ -134,11 +134,9 @@ export default function BookingPage() {
   if (!course) return <p style={{ textAlign: 'center', marginTop: '2rem' }}>Loading course...</p>;
 
   const appearance = {
-    theme: 'day',
+    theme: 'stripe  ',
     variables: {
-      colorText: '#fff',
-      colorPrimary: '#00aeef',
-      fontSizeBase: '16px',
+
     },
   };
 

@@ -1,4 +1,2 @@
-import clientPromise from './mongodb';
-import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 
-export const adapter = MongoDBAdapter(clientPromise);
+// Removed NextAuth MongoDBAdapter. File can be deleted if not used elsewhere.

@@ -1,5 +1,4 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { createServerClient } from '@supabase/ssr';
 import { connectToDB } from '@/lib/mongodb';
 import BoatSpace from '@/models/BoatSpace';
 import Contact from '@/models/Contact';
@@ -7,13 +6,20 @@ import Contact from '@/models/Contact';
 export async function GET() {
   await connectToDB();
 
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.id) {
+
+  // Supabase Auth: get user from access token (example, adjust as needed)
+  const req = { headers: {} };
+  const res = { getHeader() {}, setHeader() {} };
+  const supabase = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, { req, res });
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
     return Response.json({ error: 'Not authenticated' }, { status: 401 });
   }
 
-  const user = await Contact.findById(session.user.id);
-  if (!user) {
+
+  // TODO: Map Supabase user to Contact if needed
+  const dbUser = await Contact.findOne({ email: user.email });
+  if (!dbUser) {
     return Response.json({ error: 'Contact not found' }, { status: 404 });
   }
 

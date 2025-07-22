@@ -109,9 +109,9 @@ export default function CheckoutPage() {
 
   // All appearance config goes here:
   const appearance = {
-    theme: 'night',
+    theme: 'stripe',
     variables: {
-      colorText: '#fff',
+      colorText: '#000',
       colorPrimary: '#00aeef',
       fontSizeBase: '16px',
     },
@@ -128,7 +128,7 @@ export default function CheckoutPage() {
 
   return (
     <div style={{ minHeight: '80vh', background: '#111' }}>
-      <h1 style={{ textAlign: 'center', color: '#fff' }}>Checkout</h1>
+      <h1 style={{ textAlign: 'center', color: 'black' }}>Checkout</h1>
       <CheckoutProvider
         stripe={stripePromise}
         options={{

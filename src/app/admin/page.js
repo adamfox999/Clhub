@@ -58,7 +58,8 @@ export default function AdminDashboard() {
         _id: spaceId,
         lat: markerPosition.lat,
         lng: markerPosition.lng,
-        status
+        status,
+        billingContact: spaces.find(s => s._id === spaceId)?.billingContact || ""
       })
     });
 

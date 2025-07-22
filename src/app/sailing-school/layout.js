@@ -1,4 +1,4 @@
-import '../styles/global.css';
+import '../../styles/global.css';
 import SessionWrapper from '@/components/SessionWrapper';
 import Navbar from '@/components/Navbar';
 

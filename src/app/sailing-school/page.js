@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+
 import Link from "next/link";
 import { FilledButton } from "@/devlink";
 
 export default function SailingSchoolPage() {
   const [courses, setCourses] = useState([]);
-  const { data: session } = useSession();
+  // TODO: Replace with Supabase session
+  const session = null;
 
   useEffect(() => {
     fetch('/api/courses')
