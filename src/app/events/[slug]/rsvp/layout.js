@@ -1,14 +1,10 @@
-import '../../../../styles/global.css';
+import '../../../../styles/globals.css';
 import SessionWrapper from '@/components/SessionWrapper';
 
-export default function RootLayout({ children }) {
+export default function Layout({ children }) {
   return (
-    <html lang="en">
-      <body>
-        <SessionWrapper>
-          {children}
-        </SessionWrapper>
-      </body>
-    </html>
+    <SessionWrapper>
+      {children}
+    </SessionWrapper>
   );
 }

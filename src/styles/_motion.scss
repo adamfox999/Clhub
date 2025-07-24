@@ -1,0 +1,41 @@
+$easing: (
+    Emphasized: cubic-bezier(0.2, 0.0, 0, 1.0),
+    Emphasized-accelerate: cubic-bezier(0.3, 0.0, 0.8, 0.15),
+    Emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1.0),
+    Standard: cubic-bezier(0.2, 0.0, 0, 1.0),
+    Standard-decelerate: cubic-bezier(0, 0, 0, 1),
+    Standard-accelerate: cubic-bezier(0.3, 0, 1, 1)
+);
+
+$duration: (
+    Short-1: 50ms,
+    Short-2: 100ms,
+    Short-3: 150ms,
+    Short-4: 200ms,
+    Medium-1: 250ms,
+    Medium-2: 300ms,
+    Medium-3: 350ms,
+    Medium-4: 400ms,
+    Long-1: 450ms,
+    Long-2: 500ms,
+    Long-3: 550ms,
+    Long-4: 600ms,
+    Extra-long-1: 700ms,
+    Extra-long-2: 800ms,
+    Extra-long-3: 900ms,
+    Extra-long-4: 1000ms
+);
+
+@function motion($easing-key, $duration-key) {
+    $easing-value: map-get($easing, $easing-key);
+    $duration-value: map-get($duration, $duration-key);
+
+    @if not $easing-value {
+        @error "Invalid easing key: #{$easing-key}";
+    }
+    @if not $duration-value {
+        @error "Invalid duration key: #{$duration-key}";
+    }
+
+    @return $duration-value $easing-value;
+}

@@ -1,0 +1,100 @@
+@use '../layouts/breakpoints' as *;
+
+$size: (
+    1: 2px,
+    2: 0.25rem,
+    3: 0.5rem,
+    4: 0.75rem,
+    5: 1rem,
+    6: 1.25rem,
+    7: 1.5rem,
+    8: 1.75rem,
+    9: 2rem,
+    10: 2.5rem,
+    11: 3rem,
+    12: 3.5rem,
+    13: 4rem,
+    14: 4.5rem,
+    15: 5rem,
+    16: 6rem,
+    17: 8rem,
+    18: 10rem,
+);
+
+@function size($key) {
+  @return map-get($size, $key);
+}
+
+
+
+$group: size(3);
+$padding: size(5);
+$spacer: size(7);
+
+
+.icon-mini{
+  height: size(6);
+  width: size(6);
+}
+
+
+.icon-small{
+    height: size(7);
+    width: size(7);
+}
+
+
+
+.icon-medium{
+    height: size(10);
+    width: size(10);
+}
+
+:root {
+  --margin: #{size(7)}; // Default margin for all elements
+}
+
+@include window-size(compact) {
+  :root {
+    --margin: #{size(4)};
+    --padding: #{size(5)};
+    --group: #{size(3)};
+    --spacer: #{size(12)};
+  }
+}
+
+@include window-size(medium) {
+  :root {
+    --margin: #{size(7)};
+    --padding: #{size(5)};
+    --group: #{size(3)};
+    --spacer: #{size(12)};
+  }
+}
+
+@include window-size(expanded) {
+  :root {
+    --margin: #{size(9)};
+    --padding: #{size(5)};
+    --group: #{size(3)};
+    --spacer: #{size(12)};
+  }
+}
+
+@include window-size(large) {
+  :root {
+    --margin: #{size(9)};
+    --padding: #{size(5)};
+    --group: #{size(3)};
+    --spacer: #{size(12)};
+  }
+}
+
+@include window-size(extra-large) {
+  :root {
+    --margin: #{size(9)};
+    --padding: #{size(5)};
+    --group: #{size(3)};
+    --spacer: #{size(12)};
+  }
+}

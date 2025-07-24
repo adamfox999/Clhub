@@ -1,0 +1,43 @@
+// Elevation map with two shadows per level.
+$elevation: (
+  0: (
+    (x: 0px, y: 0px, blur: 0px, spread: 0px, color: rgba(0, 0, 0, 0.0)),
+    (x: 0px, y: 0px, blur: 0px, spread: 0px, color: rgba(0, 0, 0, 0.0))
+  ), 
+1: (
+    (x: 0px, y: 1px, blur: 2px, spread: 0px, color: rgba(0, 0, 0, 0.3)),
+    (x: 0px, y: 1px, blur: 3px, spread: 1px, color: rgba(0, 0, 0, 0.15))
+  ),
+  2: (
+    (x: 0px, y: 1px, blur: 2px, spread: 0px, color: rgba(0, 0, 0, 0.3)),
+    (x: 0px, y: 2px, blur: 6px, spread: 2px, color: rgba(0, 0, 0, 0.15))
+  ),
+  3: (
+    (x: 0px, y: 4px, blur: 8px, spread: 3px, color: rgba(0, 0, 0, 0.15)),
+    (x: 0px, y: 1px, blur: 3px, spread: 0px, color: rgba(0, 0, 0, 0.3))
+  ),
+  4: (
+    (x: 0px, y: 6px, blur: 10px, spread: 4px, color: rgba(0, 0, 0, 0.15)),
+    (x: 0px, y: 2px, blur: 3px, spread: 0px, color: rgba(0, 0, 0, 0.3))
+  ),
+  5: (
+    (x: 0px, y: 8px, blur: 12px, spread: 6px, color: rgba(0, 0, 0, 0.15)),
+    (x: 0px, y: 4px, blur: 4px, spread: 0px, color: rgba(0, 0, 0, 0.3))
+  )
+);
+
+// Mixin to apply the elevation.
+// It accepts a level (1 through 5) and outputs both shadows as a comma-separated list.
+@mixin elevation($level) {
+  $shadows: map-get($elevation, $level);
+  @if $shadows {
+    $shadow-list: ();
+    @each $shadow in $shadows {
+      $shadow-str: #{map-get($shadow, x)} #{map-get($shadow, y)} #{map-get($shadow, blur)} #{map-get($shadow, spread)} #{map-get($shadow, color)};
+      $shadow-list: append($shadow-list, $shadow-str, comma);
+    }
+    box-shadow: $shadow-list;
+  } @else {
+    @warn "Elevation level #{$level} is not defined in the \$elevation map.";
+  }
+}

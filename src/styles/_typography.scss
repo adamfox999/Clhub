@@ -1,0 +1,180 @@
+@use "sass:math";
+
+$line-height-large: 1.2;
+$line-height-small: 1.5;
+
+// Typeface
+$brand: 'Lora';
+$plain: 'Roboto';
+$weight-bold: 700;
+$weight-medium: 500;
+$weight-regular: 400;
+
+// Typescale
+
+$base-font-size: 14;         // Base step (0) = 14px
+$browser-default-rem: 16;    // 16px browser default
+$type-scale-ratio: 1.125;     // Ratio for scaling
+
+@function type-scale-rem($step) {
+  // Calculate pixel size using exponentiation:
+  $size-px: $base-font-size * math.pow($type-scale-ratio, $step);
+  // Convert px to rem based on the browser default:
+  $rem-value: math.div($size-px, $browser-default-rem);
+  // Round to 3 decimal places:
+  $rounded: math.div(math.round($rem-value * 1000), 1000);
+  @return #{$rounded}rem;
+}
+
+// Define the type scale steps:
+$type-scale-steps: -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
+
+// Create an empty map:
+$typescale: ();
+
+// Populate the map with each step as key and its computed rem value as value:
+@each $step in $type-scale-steps {
+  $typescale: map-merge($typescale, ($step: type-scale-rem($step)));
+}
+
+
+@mixin typography($font-family, $font-size-min, $font-size-calc, $font-size-max, $line-height, $font-weight, $letter-spacing) {
+  font-family: $font-family;
+  font-size: clamp($font-size-min, $font-size-calc, $font-size-max);
+  line-height: clamp(#{$font-size-min} * #{$line-height}, #{$font-size-calc} * #{$line-height}, #{$font-size-max} * #{$line-height});
+  font-weight: $font-weight;
+  letter-spacing: $letter-spacing;
+}
+
+/* Baseline Typography */
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0px;
+}
+
+.display-large {
+  @include typography($brand, map-get($typescale, 8), 10cqw, map-get($typescale, 12), $line-height-large, $weight-regular, -0.25px);
+}
+
+.display-medium {
+  @include typography($brand, map-get($typescale, 8), 10cqw, map-get($typescale, 10), $line-height-large, $weight-regular, 0px);
+}
+
+.display-small {
+  @include typography($brand, map-get($typescale, 8), 10cqw, map-get($typescale, 8), $line-height-large, $weight-regular, 0px);
+}
+
+.headline-large {
+  @include typography($brand, map-get($typescale, 5), 10cqw, map-get($typescale, 7), $line-height-large, $weight-regular, 0px);
+}
+
+.headline-medium {
+  @include typography($brand, map-get($typescale, 5), 10cqw, map-get($typescale, 6), $line-height-large, $weight-regular, 0px);
+}
+
+.headline-small {
+  @include typography($brand, map-get($typescale, 5), 10cqw, map-get($typescale, 5), $line-height-large, $weight-regular, 0px);
+  
+}
+
+.title-large {
+  @include typography($plain, map-get($typescale, 0), 10cqw, map-get($typescale, 4), $line-height-large, $weight-regular, 0px);
+}
+
+.title-medium {
+  @include typography($plain, map-get($typescale, 0), 10cqw, map-get($typescale, 2), $line-height-large, $weight-medium, 0.15px);
+}
+
+.title-small {
+  @include typography($plain, map-get($typescale, 0), 10cqw, map-get($typescale, 0), $line-height-large, $weight-medium, 0.1px);
+}
+
+.body-large {
+  @include typography($plain, map-get($typescale, -1), 10cqw, map-get($typescale, 1), $line-height-small, $weight-regular, 0.5px);
+}
+
+.body-medium {
+  @include typography($plain, map-get($typescale, -1), 10cqw, map-get($typescale, 0), $line-height-small, $weight-regular, 0.25px);
+}
+
+.body-small {
+  @include typography($plain, map-get($typescale, -1), 10cqw, map-get($typescale, -1), $line-height-small, $weight-regular, 0.4px);
+}
+
+.label-large {
+//  @include typography($plain, map-get($typescale, 0), $line-height-small, $weight-medium, 0.1px);
+  @include typography($plain, map-get($typescale, -2), 8cqw, map-get($typescale, 0), $line-height-small, $weight-medium, 0.1px);
+}
+
+.label-medium {
+  @include typography($plain,  map-get($typescale, -2), 8cqw, map-get($typescale, -1), $line-height-small, $weight-medium, 0.5px);
+}
+
+.label-small {
+  @include typography($plain,  map-get($typescale, -2), 8cqw, map-get($typescale, -2), $line-height-small, $weight-medium, 0.5px);
+}
+
+/* Emphasized Typeography */
+
+.display-large-emphasized  {
+  @include typography($brand, map-get($typescale, 8), 10cqw, map-get($typescale, 12), $line-height-large, $weight-medium, -0.25px);
+}
+
+.display-medium-emphasized {
+  @include typography($brand, map-get($typescale, 8), 10cqw, map-get($typescale, 10), $line-height-large, $weight-medium, 0px);
+}
+
+.display-small-emphasized {
+  @include typography($brand, map-get($typescale, 8), 10cqw, map-get($typescale, 8), $line-height-large, $weight-medium, 0px);
+}
+
+.headline-large-emphasized {
+  @include typography($brand, map-get($typescale, 5), 10cqw, map-get($typescale, 7), $line-height-large, $weight-medium, 0px);
+}
+
+.headline-medium-emphasized {
+  @include typography($brand, map-get($typescale, 5), 10cqw, map-get($typescale, 6), $line-height-large, $weight-medium, 0px);
+}
+
+.headline-small-emphasized {
+  @include typography($brand, map-get($typescale, 5), 10cqw, map-get($typescale, 5), $line-height-large, $weight-medium, 0px);
+  
+}
+
+.title-large-emphasized {
+  @include typography($plain, map-get($typescale, 0), 10cqw, map-get($typescale, 4), $line-height-large, $weight-medium, 0px);
+}
+
+.title-medium-emphasized {
+  @include typography($plain, map-get($typescale, 0), 10cqw, map-get($typescale, 2), $line-height-large, $weight-bold, 0.15px);
+}
+
+.title-small-emphasized {
+  @include typography($plain, map-get($typescale, 0), 10cqw, map-get($typescale, 0), $line-height-large, $weight-bold, 0.1px);
+}
+
+.body-large-emphasized {
+  @include typography($plain, map-get($typescale, -1), 10cqw, map-get($typescale, 1), $line-height-small, $weight-medium, 0.5px);
+}
+
+.body-medium-emphasized {
+  @include typography($plain, map-get($typescale, -1), 10cqw, map-get($typescale, 0), $line-height-small, $weight-medium, 0.25px);
+}
+
+.body-small-emphasized {
+  @include typography($plain, map-get($typescale, -1), 10cqw, map-get($typescale, -1), $line-height-small, $weight-medium, 0.4px);
+}
+
+.label-large-emphasized {
+//  @include typography($plain, map-get($typescale, 0), $line-height-small, $weight-medium, 0.1px);
+  @include typography($plain, map-get($typescale, -2), 8cqw, map-get($typescale, 0), $line-height-small, $weight-bold, 0.1px);
+}
+
+.label-medium-emphasized {
+  @include typography($plain,  map-get($typescale, -2), 8cqw, map-get($typescale, -1), $line-height-small, $weight-bold, 0.5px);
+}
+
+.label-small-emphasized {
+  @include typography($plain,  map-get($typescale, -2), 8cqw, map-get($typescale, -2), $line-height-small, $weight-bold, 0.5px);
+}
+

@@ -1,0 +1,31 @@
+@use 'size' as *;
+
+$shape-rounded: (
+  corner-extra-large: size(8),
+  corner-full: 9999px, // Fully rounded
+  corner-large: size(5),
+  corner-medium: size(4),
+  corner-none: 0,
+  corner-small: size(3),
+  corner-extra-small: size(2)
+);
+
+$shape-semi-round: (
+  corner-extra-large: size(4),
+  corner-full: size(3), // Fully rounded
+  corner-large: size(4),
+  corner-medium: size(4),
+  corner-none: 0,
+  corner-small: size(3),
+  corner-extra-small: size(2)
+);
+
+$shape-square: (
+  corner-extra-large: 0,
+  corner-full: 0, // Fully square
+  corner-large: 0,
+  corner-medium: 0,
+  corner-none: 0,
+  corner-small: 0,
+  corner-extra-small: 0,
+);
