@@ -17,7 +17,7 @@ function fetchOrder(token) {
     cutoff: new Date(Date.now() + 60 * 60 * 1000), // 1 hour from now
     placedAt: new Date(Date.now() - 10 * 60 * 1000), // 10 min ago
   };
-// ...existing code...
+}
 
 export default function ManageOrderPage({ params }) {
   const { orderToken } = params || {};
@@ -89,5 +89,4 @@ export default function ManageOrderPage({ params }) {
       )}
     </div>
   );
-}
 }
