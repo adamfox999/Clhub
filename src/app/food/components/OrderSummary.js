@@ -22,12 +22,14 @@ export default function OrderSummary({
             <strong>{item.name}</strong> £{item.price}
             {item.customisations?.length > 0 && (
               <span> | Customisations: {item.customisations.map(c => c.name).join(', ')}</span>
-  return (
-    <div style={{ maxWidth: 500, margin: '32px auto', padding: 24, border: '1px solid #eee', borderRadius: 12 }}>
-      <h2>Order Confirmation</h2>
-      <div>Order Number: <strong>{orderNumber}</strong></div>
-      <div>Order ID: <span style={{ fontSize: '0.9em' }}>{orderId}</span></div>
-      <ul style={{ padding: 0, listStyle: 'none' }}>
+            )}
+            {onAddToCheckout && (
+              <button style={{ marginLeft: 12 }} onClick={() => onAddToCheckout(item)}>
+                Add to Checkout
+              </button>
+            )}
+          </li>
+        ))}
         {basket.map((item, idx) => (
           <li key={idx} style={{ marginBottom: 12 }}>
             <strong>{item.name}</strong> £{item.price}

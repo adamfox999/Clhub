@@ -1,4 +1,3 @@
-import { createServerClient } from '@supabase/ssr';
 import { connectToDB } from '@/lib/mongodb';
 import BoatSpace from '@/models/BoatSpace';
 import Contact from '@/models/Contact';
