@@ -1,5 +1,5 @@
-import Image from 'next/image';
 "use client";
+import Image from 'next/image';
 // Helper to wait for grecaptcha to load
 const waitForGrecaptcha = () =>
   new Promise(resolve => {
