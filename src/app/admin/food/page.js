@@ -1,15 +1,9 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
 import OrderTable from './components/OrderTable';
 import OrderFilter from './components/OrderFilter';
 import OrderNotesModal from './components/OrderNotesModal';
 import MenuManager from './components/MenuManager';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
 
 export default function AdminFoodPage() {
   const [orders, setOrders] = useState([]);
@@ -18,29 +12,25 @@ export default function AdminFoodPage() {
 
   useEffect(() => {
     async function checkAdminAndFetchOrders() {
-      // Get auth user
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-      if (!user) {
+      // Get auth user from API
+      const userRes = await fetch('/api/auth/user');
+      const userData = await userRes.json();
+      setUser(userData.user);
+      if (!userData.user) {
         window.location.href = '/auth/signin';
         return;
       }
-      // Get profile
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('role')
-        .eq('id', user.id)
-        .single();
-      if (profileError || !profile || profile.role !== 'admin') {
+      // Get profile from API
+      const profileRes = await fetch(`/api/profiles/${userData.user.id}`);
+      const profileData = await profileRes.json();
+      if (!profileData || profileData.role !== 'admin') {
         window.location.href = '/auth/signin';
         return;
       }
-      // Fetch orders
-      const { data: ordersData, error: ordersError } = await supabase
-        .from('orders')
-        .select('*')
-        .order('created_at', { ascending: false });
-      if (!ordersError) setOrders(ordersData);
+      // Fetch orders from API
+      const ordersRes = await fetch('/api/admin/orders');
+      const ordersData = await ordersRes.json();
+      setOrders(ordersData.orders || []);
       setLoading(false);
     }
     checkAdminAndFetchOrders();
