@@ -82,7 +82,7 @@ export default function AdminSailingSchool() {
           <input type="datetime-local" name="date" value={form.date} onChange={handleChange} required />
         </label>
         <label>
-          Duration (e.g. "2 days")
+          Duration (e.g. &quot;2 days&quot;)
           <input name="duration" value={form.duration} onChange={handleChange} required />
         </label>
         <label>

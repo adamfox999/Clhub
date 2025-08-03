@@ -77,7 +77,7 @@ export default function SignInPage() {
       </div>
 
       <div style={{ marginTop: 32, textAlign: 'center' }}>
-        <span>Don't have an account?{' '}</span>
+        <span>Don&apos;t have an account?{' '}</span>
         <a href="/account/signup" style={{ color: '#0070f3', textDecoration: 'underline' }}>Create an account</a>
       </div>
 
