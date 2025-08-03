@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
-import { FilledButton } from "@/devlink";
+// Removed devlink import
 
 export default function SailingSchoolPage() {
   const [courses, setCourses] = useState([]);

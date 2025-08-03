@@ -3,7 +3,7 @@
 // Moved from /app/page.js
 import { useEffect, useState } from 'react';
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
-import { FilledButton } from '@/devlink';
+// Removed devlink import
 
 const mapContainerStyle = {
   width: '100%',
