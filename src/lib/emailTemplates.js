@@ -31,3 +31,25 @@ export async function getBoatSpaceConfirmation({ spaceId, amount }) {
 }
 
 // Add more for other email types!
+
+// Food order confirmation email
+import fs from 'fs/promises';
+import path from 'path';
+
+export async function getFoodOrderConfirmation({ order, manageLink }) {
+  const templatePath = path.resolve(process.cwd(), 'src/emails/food_order_confirmation.txt');
+  let template = await fs.readFile(templatePath, 'utf8');
+
+  // Fill template variables
+  template = template
+    .replace(/{{orderNumber}}/g, order.order_number.toString().padStart(4, '0'))
+    .replace(/{{requestedTime}}/g, new Date(order.requested_time).toLocaleString())
+    .replace(/{{total}}/g, order.total.toFixed(2))
+    .replace(/{{notes}}/g, order.notes || '')
+    .replace(/{{manageLink}}/g, manageLink)
+    .replace(/{{items}}/g, order.items.map(item => `- ${item.name} x${item.quantity} (£${item.price.toFixed(2)})`).join('\n'));
+
+  const subject = `Food Order Confirmed: #${order.order_number.toString().padStart(4, '0')}`;
+  const text = template;
+  return { subject, text };
+}

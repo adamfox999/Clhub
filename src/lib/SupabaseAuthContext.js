@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabaseClient';
 
 const AuthContext = createContext();
 
-export function AuthProvider({ children }) {
+export function SupabaseAuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 

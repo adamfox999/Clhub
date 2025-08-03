@@ -1,0 +1,14 @@
+Food Order Confirmed: #{{orderNumber}}
+
+Thank you for your food order!
+
+Order Number: #{{orderNumber}}
+Requested Time: {{requestedTime}}
+Total: £{{total}}
+Notes: {{notes}}
+
+Items:
+{{items}}
+
+To manage or cancel your order, use this link:
+{{manageLink}}

@@ -1,19 +1,17 @@
 'use client';
-
 import Link from 'next/link';
 import { useAuth } from '@/lib/SupabaseAuthContext';
 import { supabase } from '@/lib/supabaseClient';
 
-export default function Navbar() {
+export default function AdminNavbar() {
   const { user, loading } = useAuth();
 
   return (
-    <nav style={{ padding: '1rem', borderBottom: '1px solid #ccc', display: 'flex', justifyContent: 'space-between' }}>
+    <nav style={{ padding: '1rem', borderBottom: '1px solid #ccc', background: '#222', color: '#fff', display: 'flex', justifyContent: 'space-between' }}>
       <div>
-        <Link href="/" style={{ marginRight: '1rem' }}>Boat Park</Link>
-        <Link href="/admin" style={{ marginRight: '1rem' }}>Admin</Link>
-        <Link href="/sailing-school" style={{ marginRight: '1rem' }}>Sailing School</Link>
-        <Link href="/food" style={{ marginRight: '1rem' }}>Food</Link>
+        <Link href="/admin" style={{ marginRight: '1rem', color: '#fff' }}>Admin Home</Link>
+        <Link href="/admin/food" style={{ marginRight: '1rem', color: '#fff' }}>Food Orders</Link>
+        {/* Add more admin links as needed */}
       </div>
       <div>
         {loading ? (
