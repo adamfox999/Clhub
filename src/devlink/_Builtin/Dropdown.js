@@ -176,8 +176,8 @@ export const DropdownToggle = React.forwardRef(function DropdownToggle(
     tabIndex: 0,
     ref,
   });
-});
-export const DropdownList = React.forwardRef(function DropdownList(
+    () => setOpen(false),
+    []
   { tag = "nav", className = "", ...props },
   ref
 ) {

@@ -248,7 +248,7 @@ export default function MenuManager() {
                       <strong>{item.name}</strong> ({category.name})<br />
                       <span>{item.description}</span><br />
                       <span>Price: £{item.price}</span><br />
-                      {item.image_url && (<img src={item.image_url} alt={item.name} style={{ maxWidth: 100, marginTop: 8 }} />)}
+                      {item.image_url && (<Image src={item.image_url} alt={item.name} width={100} height={100} style={{ marginTop: 8 }} />)}
                       <div>Customisations: {Array.isArray(item.customisations)
                         ? item.customisations.map(c => `${c.name}${c.price ? ` (£${c.price})` : ''}`).join(', ')
                         : ''}

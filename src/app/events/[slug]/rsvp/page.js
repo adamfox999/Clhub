@@ -208,10 +208,12 @@ export default function RSVPPage() {
           </div>
         )}
         {event.event_image && (
-          <img
+          <Image
             src={event.event_image}
             alt={event.name}
             style={{ width: '100%', maxWidth: 350, borderRadius: 12, marginBottom: 16, objectFit: 'cover' }}
+          width={400}
+          height={300}
           />
         )}
         {/* Show current RSVP status above the buttons */}

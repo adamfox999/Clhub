@@ -47,7 +47,7 @@ export const Twitter = React.forwardRef(function Twitter(
     return () => {
       isComponentMounted = false;
     };
-  }, []);
+  }, [mode, size, text, url]);
   return React.createElement("div", {
     ...props,
     className: className + " w-widget w-widget-twitter",

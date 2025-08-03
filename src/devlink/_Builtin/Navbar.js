@@ -178,7 +178,7 @@ function Navbar({ tag = "div", className = "", children, config, ...props }) {
     (entry) => {
       setShouldExtractMenu(entry.contentRect.width <= BREAKPOINTS[collapse]);
     },
-    [setShouldExtractMenu]
+    [setShouldExtractMenu, collapse]
   );
   const bodyRef = React.useRef(
     typeof document !== "undefined" ? document.body : null

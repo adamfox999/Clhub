@@ -155,7 +155,7 @@ export default function BookingPage() {
             elementsOptions: { appearance },
           }}
         >
-          // inside BookingPage
+          {/* inside BookingPage */}
 <BookingForm
   course={course}
   price={price}
