@@ -176,10 +176,8 @@ export const DropdownToggle = React.forwardRef(function DropdownToggle(
     tabIndex: 0,
     ref,
   });
-export const DropdownList = React.forwardRef(function DropdownList(
-  { tag = "nav", className = "", ...props },
-  ref
-) {
+}
+export const DropdownList = React.forwardRef(function DropdownList({ tag = "nav", className = "", ...props }, ref) {
   const { isOpen } = React.useContext(DropdownContext);
   const { isOpen: isNavbarOpen } = React.useContext(NavbarContext);
   return React.createElement(tag, {
