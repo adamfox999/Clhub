@@ -1,8 +1,10 @@
-'use client';
+"use client";
+import { useSession } from 'next-auth/react';
 
 import { useEffect, useState } from "react";
 
 import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense } from "react";
 import { loadStripe } from '@stripe/stripe-js';
 import {
   CheckoutProvider,
@@ -69,7 +71,15 @@ function BookingForm({ course, price, onSuccess, customerEmail }) {
 }
 
 
-export default function BookingPage() {
+export default function BookingPageWrapper() {
+  return (
+    <Suspense>
+      <BookingPage />
+    </Suspense>
+  );
+}
+
+function BookingPage() {
   const searchParams = useSearchParams();
   const courseId = searchParams.get('courseId');
   const { data: session } = useSession();
@@ -78,92 +88,5 @@ export default function BookingPage() {
   const [price, setPrice] = useState(null);
   const router = useRouter();
 
-  // Fetch course info
-  useEffect(() => {
-    if (!courseId) return;
-    fetch(`/api/courses?id=${courseId}`)
-      .then(res => res.json())
-      .then(data => {
-        const c = Array.isArray(data) ? data[0] : data;
-        setCourse(c);
-        if (session?.user?.role === 'member') {
-          setPrice(c.memberPrice);
-        } else {
-          setPrice(c.nonMemberPrice);
-        }
-      });
-  }, [courseId, session]);
-
-  // NEW: Get Stripe customer, then checkout session
-  useEffect(() => {
-    // Only start if everything loaded and user is logged in
-    if (!course || !price || !session?.user?.id) return;
-
-    // 1. Get or create Stripe customer ID for this user
-    fetch('/api/get-or-create-stripe-customer', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId: session.user.id }),
-    })
-      .then(res => res.json())
-      .then(async ({ stripeCustomerId, error }) => {
-        if (error || !stripeCustomerId) {
-          alert("Problem getting Stripe customer: " + error);
-          return;
-        }
-        // 2. Create the checkout session for this customer
-        const res = await fetch('/api/create-checkout-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            amount: price,
-            description: `Course Booking: ${course.title} (${new Date(course.date).toLocaleDateString()})`,
-            metadata: { type: 'course', courseId: course._id, userId: session.user.id },
-            customerId: stripeCustomerId // <-- pass it!
-          }),
-        });
-        const data = await res.json();
-        if (data.error) {
-          alert("Checkout session error: " + data.error);
-          return;
-        }
-        setClientSecret(data.clientSecret);
-      });
-  }, [course, price, session]);
-
-  if (!course) return <p style={{ textAlign: 'center', marginTop: '2rem' }}>Loading course...</p>;
-
-  const appearance = {
-    theme: 'stripe  ',
-    variables: {
-
-    },
-  };
-
-  return (
-    <main style={{ minHeight: '80vh', background: '#111', color: '#fff' }}>
-      <h1 style={{ textAlign: 'center' }}>Book: {course.title}</h1>
-      <p><b>Date:</b> {new Date(course.date).toLocaleString()}</p>
-      <p><b>Description:</b> {course.description}</p>
-      <p><b>Duration:</b> {course.duration}</p>
-      <p><b>Price:</b> £{price}</p>
-      {clientSecret && (
-        <CheckoutProvider
-          stripe={stripePromise}
-          options={{
-            fetchClientSecret: async () => clientSecret,
-            elementsOptions: { appearance },
-          }}
-        >
-          {/* inside BookingPage */}
-<BookingForm
-  course={course}
-  price={price}
-  onSuccess={() => router.push('/sailing-school/success')}
-  customerEmail={session?.user?.email}
-/>
-        </CheckoutProvider>
-      )}
-    </main>
-  );
+  // ...existing code...
 }

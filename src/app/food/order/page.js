@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import OrderSummary from "../components/OrderSummary";
 
@@ -20,6 +21,19 @@ export default function FoodOrderPage() {
       return () => clearTimeout(timer);
     }
   }, [snackbar]);
+  // Dummy order data
+  const order = {
+    orderNumber: '12345',
+    orderId: 'abcde',
+    basket: [
+      { id: 1, name: 'Pizza', quantity: 2, price: 12.99 },
+      { id: 2, name: 'Salad', quantity: 1, price: 7.99 }
+    ],
+    notes: 'No onions',
+    allergies: 'Peanuts',
+    total: 33.97,
+    confirmationSent: false
+  };
   return (
     <>
       {snackbar && (

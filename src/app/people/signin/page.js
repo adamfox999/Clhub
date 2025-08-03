@@ -8,7 +8,7 @@ export default function SignInPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
-  const { user } = useAuth();
+  const { user } = useAuth() || {};
 
   // Supabase email login
   const handleEmailLogin = async (e) => {
