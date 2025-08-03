@@ -1,3 +1,4 @@
+import Image from 'next/image';
 // Menu manager component
 import { useState, useEffect } from 'react';
 

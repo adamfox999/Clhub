@@ -45,10 +45,9 @@ export default function SailingSchoolPage() {
             </div>
             <div 
             style={{display: 'flex'}}>
-            <FilledButton
-            link = {{ href: `/sailing-school/book?courseId=${course._id}`}}
-              text= "Is this what it says"
-            />
+            <button type="button" onClick={() => window.location.href = `/sailing-school/book?courseId=${course._id}`} style={{ margin: '0 8px' }}>
+              Is this what it says
+            </button>
             </div>
           </li>
         ))}

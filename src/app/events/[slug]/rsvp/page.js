@@ -1,3 +1,4 @@
+import Image from 'next/image';
 "use client";
 // Helper to wait for grecaptcha to load
 const waitForGrecaptcha = () =>
