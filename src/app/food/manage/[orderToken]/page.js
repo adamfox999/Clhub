@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 // Dummy order fetch by token (replace with backend call)
