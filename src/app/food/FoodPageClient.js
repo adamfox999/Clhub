@@ -264,7 +264,7 @@ export default function FoodPageClient({ initialCategories, initialMenu }) {
         {/* Main Menu Column */}
         <div className={styles.menuColumn}>
           <h1>Wednesday Night Pizza</h1>
-          <p style={{padding: '16px 0'}}>Please order your pizza for this upcoming Wednesday. You'll be able to order on the night, but we strongly recommend pre-ordering to avoid disappointment. If you have any special dietary requirements, please place your order by the end of Monday.</p>
+          <p style={{padding: '16px 0'}}>Please order your pizza for this upcoming Wednesday. You&apos;ll be able to order on the night, but we strongly recommend pre-ordering to avoid disappointment. If you have any special dietary requirements, please place your order by the end of Monday.</p>
           
           {categories.sort((a, b) => a.order - b.order).map(category => {
             const catItems = menu
