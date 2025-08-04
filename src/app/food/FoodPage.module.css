@@ -1,0 +1,332 @@
+/* Responsive layout for food page */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px;
+  min-height: 100vh;
+}
+
+.layout {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+
+.menuColumn {
+  min-width: 0;
+}
+
+.basketColumn {
+  min-width: 0;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.totalDisplay {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #fff;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.confirmButton {
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.confirmButton:enabled {
+  background: #007bff;
+}
+
+.confirmButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.formInput {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.textArea {
+  min-height: 80px;
+}
+
+/* Compact: 0-599px (1 pane) */
+@media (max-width: 599px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .basketColumn {
+    position: static;
+    margin-top: 20px;
+  }
+}
+
+/* Medium: 600-839px (1-2 panes, recommended 1) */
+@media (min-width: 600px) and (max-width: 839px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .basketColumn {
+    position: static;
+    margin-top: 20px;
+  }
+}
+
+/* Expanded: 840-1199px (2 panes) */
+@media (min-width: 840px) and (max-width: 1199px) {
+  .layout {
+    grid-template-columns: 1fr 350px;
+  }
+}
+
+/* Animation for dropdown customisations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Allergen card - hidden on mobile and medium screens */
+.allergenCard {
+  margin-top: 16px;
+  padding: 16px;
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* Hide allergen card on compact and medium screens */
+@media (max-width: 839px) {
+  .allergenCard {
+    display: none;
+  }
+}
+
+/* Large: 1200-1599px (2 panes) */
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .layout {
+    grid-template-columns: 1fr 400px;
+  }
+}
+
+/* Extra-large: 1600px+ (2 panes) */
+@media (min-width: 1600px) {
+  .layout {
+    grid-template-columns: 1fr 450px;
+  }
+}
+
+/* Bottom Sheet Styles for Mobile/Tablet */
+.bottomSheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  display: none;
+  transform: translateY(0);
+}
+
+.handle {
+  width: 32px;
+  height: 4px;
+  background: #ccc;
+  border-radius: 2px;
+  margin: 8px auto;
+  cursor: pointer;
+}
+
+.bottomSheetHeader {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 60px;
+}
+
+.basketSummary {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.basketSummary:hover {
+  background: #f5f5f5;
+}
+
+.basketInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.itemCount {
+  font-size: 14px;
+  color: #666;
+}
+
+.totalPrice {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.expandIcon {
+  font-size: 18px;
+  color: #666;
+  transition: transform 0.2s;
+}
+
+.bottomSheetButton {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.bottomSheetButton:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.bottomSheetButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.bottomSheetContent {
+  padding: 16px;
+  max-height: 60vh;
+  overflow-y: auto;
+  border-top: 1px solid #eee;
+}
+
+.basketList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.basketItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.basketItem:last-child {
+  border-bottom: none;
+}
+
+.itemDetails {
+  flex: 1;
+}
+
+.itemPrice {
+  margin-left: 8px;
+  color: #666;
+}
+
+.customisations {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.removeButton {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.removeButton:hover {
+  background: #c82333;
+}
+
+.emptyBasket {
+  text-align: center;
+  color: #666;
+  padding: 32px 16px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* Show bottom sheet on compact and medium screens */
+@media (max-width: 839px) {
+  .bottomSheet {
+    display: block;
+  }
+  
+  .basketColumn {
+    display: none;
+  }
+  
+  .menuColumn {
+    padding-bottom: 80px; /* Reduced space for bottom sheet */
+  }
+}
+
+/* Hide bottom sheet on larger screens */
+@media (min-width: 840px) {
+  .bottomSheet {
+    display: none;
+  }
+}

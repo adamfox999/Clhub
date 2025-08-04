@@ -3,70 +3,95 @@ import React from "react";
 import OrderSummary from "../components/OrderSummary";
 
 export default function FoodOrderPage() {
-  const [snackbar, setSnackbar] = React.useState(false);
-  // Simulate adding item to basket (replace with real logic)
-  // Show snackbar when an item is added to basket
-  function handleAddToCheckout(item) {
-    setSnackbar(true);
-  }
-  function handleEdit() {
-    alert('Edit order (not implemented)');
-  }
-  function handleCancel() {
-    alert('Cancel order (not implemented)');
-  }
+  const [order, setOrder] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+
   React.useEffect(() => {
-    if (snackbar) {
-      const timer = setTimeout(() => setSnackbar(false), 2000);
-      return () => clearTimeout(timer);
+    // Get order data from sessionStorage
+    const orderDataString = sessionStorage.getItem('orderData');
+    if (orderDataString) {
+      try {
+        const orderData = JSON.parse(orderDataString);
+        setOrder(orderData);
+      } catch (error) {
+        console.error('Error parsing order data:', error);
+        // Fallback to dummy data if parsing fails
+        setOrder({
+          orderNumber: 'ERROR',
+          orderId: 'unknown',
+          basket: [],
+          notes: '',
+          allergies: '',
+          total: 0,
+          confirmationSent: false
+        });
+      }
+    } else {
+      // No order data found - redirect back to food page
+      window.location.href = '/food';
+      return;
     }
-  }, [snackbar]);
-  // Dummy order data
-  const order = {
-    orderNumber: '12345',
-    orderId: 'abcde',
-    basket: [
-      { id: 1, name: 'Pizza', quantity: 2, price: 12.99 },
-      { id: 2, name: 'Salad', quantity: 1, price: 7.99 }
-    ],
-    notes: 'No onions',
-    allergies: 'Peanuts',
-    total: 33.97,
-    confirmationSent: false
-  };
+    setLoading(false);
+  }, []);
+
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '50vh',
+        fontSize: '18px',
+        color: '#666'
+      }}>
+        Loading order confirmation...
+      </div>
+    );
+  }
+
+  if (!order) {
+    return (
+      <div style={{ 
+        textAlign: 'center', 
+        padding: '50px',
+        fontSize: '18px',
+        color: '#666'
+      }}>
+        Order not found. <a href="/food">Return to food ordering</a>
+      </div>
+    );
+  }
   return (
     <>
-      {snackbar && (
-        <div style={{
-          position: 'fixed',
-          bottom: 32,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          background: '#323232',
-          color: '#fff',
-          padding: '14px 28px',
-          borderRadius: 10,
-          boxShadow: '0 2px 12px rgba(0,0,0,0.25)',
-          zIndex: 99999,
-          fontSize: 18,
-          opacity: snackbar ? 1 : 0,
-          transition: 'opacity 0.4s',
-          pointerEvents: 'none',
-        }}>
-          <span role="status" aria-live="polite">Item added to checkout</span>
+      {/* Important notice about order number */}
+      <div style={{
+        background: '#fff3cd',
+        border: '1px solid #ffeaa7',
+        borderRadius: '8px',
+        padding: '16px',
+        margin: '20px auto',
+        maxWidth: '600px',
+        textAlign: 'center'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '8px' }}>
+          <span style={{ fontSize: '20px', marginRight: '8px' }}>✏️</span>
+          <strong style={{ color: '#856404', fontSize: '16px' }}>Important: Please Write Down Your Order Number</strong>
         </div>
-      )}
+        <div style={{ margin: '16px 0', textAlign: 'center' }}>
+          <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#2c3e50', letterSpacing: '2px' }}>
+            {order.orderNumber}
+          </div>
+        </div>
+
+      </div>
+      
       <OrderSummary
         orderNumber={order.orderNumber}
-        orderId={order.orderId}
         basket={order.basket}
         notes={order.notes}
         allergies={order.allergies}
         total={order.total}
         confirmationSent={order.confirmationSent}
-        onEdit={handleEdit}
-        onCancel={handleCancel}
-        onAddToCheckout={handleAddToCheckout}
       />
     </>
   );

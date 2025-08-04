@@ -33,7 +33,6 @@ export default function Basket() {
           ))}
         </ul>
       )}
-      <div style={{ marginTop: 16, fontWeight: 'bold' }}>Total: £{getTotal().toFixed(2)}</div>
     </div>
   );
 }
