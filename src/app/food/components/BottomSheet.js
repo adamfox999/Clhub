@@ -7,7 +7,8 @@ export default function BottomSheet({
   getTotal = () => 0, 
   onConfirmOrder = () => {},
   isExpanded = false,
-  onToggleExpanded = () => {}
+  onToggleExpanded = () => {},
+  isSubmittingOrder = false
 }) {
   const itemCount = basket.length;
   
@@ -43,10 +44,10 @@ export default function BottomSheet({
           </div>
           <button 
             onClick={onConfirmOrder} 
-            disabled={basket.length === 0}
+            disabled={basket.length === 0 || isSubmittingOrder}
             className={styles.bottomSheetButton}
           >
-            Confirm Pre-Order
+            {isSubmittingOrder ? 'Submitting...' : 'Confirm Pre-Order'}
           </button>
         </div>
         

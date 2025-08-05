@@ -137,6 +137,7 @@ export default function FoodPageClient({ initialCategories, initialMenu }) {
   const [snackbarVisible, setSnackbarVisible] = React.useState(false);
   const [snackbarFade, setSnackbarFade] = React.useState(false);
   const [bottomSheetExpanded, setBottomSheetExpanded] = React.useState(false);
+  const [isSubmittingOrder, setIsSubmittingOrder] = React.useState(false);
 
   function addToBasket(item, customisationIdxs) {
     setBasket(prev => [
@@ -173,6 +174,13 @@ export default function FoodPageClient({ initialCategories, initialMenu }) {
   }
 
   async function handleOrder() {
+    // Prevent duplicate orders
+    if (isSubmittingOrder) {
+      return;
+    }
+
+    setIsSubmittingOrder(true);
+
     try {
       // Prepare order data for the API
       const orderData = {
@@ -202,6 +210,7 @@ export default function FoodPageClient({ initialCategories, initialMenu }) {
         const errorData = await response.json();
         console.error('Error saving order:', errorData);
         alert('Error submitting order. Please try again.');
+        setIsSubmittingOrder(false); // Re-enable button on error
         return;
       }
 
@@ -230,6 +239,7 @@ export default function FoodPageClient({ initialCategories, initialMenu }) {
     } catch (error) {
       console.error('Error submitting order:', error);
       alert('Error submitting order. Please try again.');
+      setIsSubmittingOrder(false); // Re-enable button on error
     }
   }
 
@@ -348,10 +358,15 @@ export default function FoodPageClient({ initialCategories, initialMenu }) {
               </div>
               <button 
                 onClick={handleOrder} 
-                disabled={basket.length === 0}
+                disabled={basket.length === 0 || isSubmittingOrder}
                 className={styles.confirmButton}
               >
-                {basket.length === 0 ? 'Add items to order' : `Confirm Pre-Order (${basket.length} item${basket.length > 1 ? 's' : ''})`}
+                {isSubmittingOrder 
+                  ? 'Submitting Order...' 
+                  : basket.length === 0 
+                    ? 'Add items to order' 
+                    : `Confirm Pre-Order (${basket.length} item${basket.length > 1 ? 's' : ''})`
+                }
               </button>
             </div>
           </div>
@@ -400,6 +415,7 @@ export default function FoodPageClient({ initialCategories, initialMenu }) {
         onConfirmOrder={handleOrder}
         isExpanded={bottomSheetExpanded}
         onToggleExpanded={toggleBottomSheet}
+        isSubmittingOrder={isSubmittingOrder}
       />
     </div>
   );
