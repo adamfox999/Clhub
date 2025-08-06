@@ -358,15 +358,10 @@ export default function FoodPageClient({ initialCategories, initialMenu }) {
               </div>
               <button 
                 onClick={handleOrder} 
-                disabled={basket.length === 0 || isSubmittingOrder}
+                disabled={true}
                 className={styles.confirmButton}
               >
-                {isSubmittingOrder 
-                  ? 'Submitting Order...' 
-                  : basket.length === 0 
-                    ? 'Add items to order' 
-                    : `Confirm Pre-Order (${basket.length} item${basket.length > 1 ? 's' : ''})`
-                }
+                Pre-ordering closed
               </button>
             </div>
           </div>
