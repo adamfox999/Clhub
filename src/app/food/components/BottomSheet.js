@@ -44,10 +44,10 @@ export default function BottomSheet({
           </div>
           <button 
             onClick={onConfirmOrder} 
-            disabled={basket.length === 0 || isSubmittingOrder}
+            disabled={true}
             className={styles.bottomSheetButton}
           >
-            {isSubmittingOrder ? 'Submitting...' : 'Confirm Pre-Order'}
+            Pre-ordering closed
           </button>
         </div>
         
